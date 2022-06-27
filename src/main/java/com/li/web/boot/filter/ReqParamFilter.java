@@ -70,6 +70,7 @@ public class ReqParamFilter implements Filter {
                 if (patternString.equals(request.getRequestURI())){
                     pathPatternFlag=true;
                     log.info("Url:"+patternString+"成功匹配!开始匹配方法类型");
+                    servletRequest.setAttribute("handlerMethod",handlerMethod);
 
                     methods = requestMappingInfo.getMethodsCondition().getMethods();
                     log.info("对应Url路径允许的方法类型为：{}",methods.size()==0?"ALL":methods);

@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         log.info("Security初始化......Security allow paths:{}",Arrays.asList(allowPaths));
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, allowPaths).hasAnyRole("admin","myUser") // 允许post请求/add-user，而无需认证
+                .antMatchers(HttpMethod.GET, allowPaths).permitAll() // 允许post请求/add-user，而无需认证
                 .anyRequest()//任何请求
                 .authenticated() // 所有请求都需要验证
                 .and()

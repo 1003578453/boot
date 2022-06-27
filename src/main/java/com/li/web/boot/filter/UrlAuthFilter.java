@@ -4,16 +4,21 @@ package com.li.web.boot.filter;
 import com.li.web.boot.util.SpringBootApplicationUtil;
 import com.li.web.boot.util.UrlHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.method.MethodSecurityMetadataSource;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 /**
  * 打印当前用户登录信息,角色信息
@@ -42,7 +47,18 @@ public class UrlAuthFilter implements Filter {
             return;
         }
 
+        HandlerMethod handlerMethod = (HandlerMethod) servletRequest.getAttribute("handlerMethod");
+        if (handlerMethod!=null){
+            Class<?> beanType = handlerMethod.getBeanType();
+            Method method = handlerMethod.getMethod();
+            MethodSecurityMetadataSource methodSecurityMetadataSource = SpringBootApplicationUtil.getApplicationContext().getBean("methodSecurityMetadataSource",MethodSecurityMetadataSource.class);
+            Collection<ConfigAttribute> attributes = methodSecurityMetadataSource.getAttributes(method, beanType);
+            log.info(randomId+"用户请求接口对应权限:"+attributes);
+           // log.info();
+        }
         if (session==null){
+            log.info(randomId+"用户登录状态:未登录");
+        }else if (session.getAttribute(this.springSecurityContextKey)==null){
             log.info(randomId+"用户登录状态:未登录");
         }else {
             SecurityContext context = (SecurityContext) session.getAttribute(this.springSecurityContextKey);
