@@ -5,13 +5,16 @@ spring:
         url: jdbc:mysql://192.168.196.0:3306/limysql
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
+    redis:
+        host: 192.168.196.0:3306
+        port: 6379
+        database: 0
 
 
 mybatis-plus:
     configuration:
         log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-        #map-underscore-to-camel-case: false #ÍÕ·åÃüÃû
-
+        #map-underscore-to-camel-case: false #ï¿½Õ·ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 

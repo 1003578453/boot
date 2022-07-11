@@ -1,6 +1,7 @@
 package com.li.web.boot.filter;
 
 
+import com.alibaba.fastjson.JSON;
 import com.li.web.boot.util.SpringBootApplicationUtil;
 import com.li.web.boot.util.UrlHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -64,13 +65,8 @@ public class UrlAuthFilter implements Filter {
             SecurityContext context = (SecurityContext) session.getAttribute(this.springSecurityContextKey);
             Authentication authentication = context.getAuthentication();
             log.info(randomId+"用户登录状态:已登录");
-            log.info(randomId+"用户登录信息:"+authentication);
+            log.info(randomId+"用户登录信息:"+ JSON.toJSONString(authentication,true));
         }
-
-        HttpSecurity httpSecurity = SpringBootApplicationUtil.getApplicationContext().getBean(HttpSecurity.class);
-        SpringBootApplicationUtil.getApplicationContext().getBean(GlobalMethodSecurityConfiguration.class);
-        //httpSecurity.ge
-        System.out.println(httpSecurity);
 
         filterChain.doFilter(servletRequest,servletResponse);
     }

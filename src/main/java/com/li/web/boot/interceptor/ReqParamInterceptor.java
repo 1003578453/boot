@@ -14,6 +14,7 @@ import org.springframework.web.util.pattern.PathPattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class ReqParamInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("-----------------ReqParamFilter执行");
+        log.info("-----------------ReqParamInterceptor执行"+handler+"-----前置验证结束");
         return true;
     }
 }

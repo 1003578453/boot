@@ -1,4 +1,4 @@
-package com.li.web.boot.btuser.service.impl;
+package com.li.web.boot.appconfig.security.config;
 
 import com.li.web.boot.btuser.entity.Tb_user;
 import com.li.web.boot.btuser.service.IUserService;

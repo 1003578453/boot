@@ -4,6 +4,7 @@ import com.li.web.boot.entity.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +22,22 @@ public class GlobalExceptionHandler {
 
     //Security用户访问异常
     @ExceptionHandler(value = AccessDeniedException.class)
-    public String exceptionHandler(AccessDeniedException e){
+    public String accessDeniedExceptionHandler(AccessDeniedException e){
         logger.error("Security用户访问异常>>>:{}",e);
+        return "error/500";
+    }
+
+   /* @ExceptionHandler(value = AuthenticationException.class)
+    public String authenticationExceptionHandler(AuthenticationException e){
+        logger.error("Security用户登录/认证异常>>>:{}",e);
+        return "error/500";
+    }*/
+
+    //
+
+    @ExceptionHandler(value = Exception.class)
+    public String exceptionHandler(Exception e){
+        logger.error("Exception>>>:{}",e);
         return "error/500";
     }
 

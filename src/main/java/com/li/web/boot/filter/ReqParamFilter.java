@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.li.web.boot.util.SpringBootApplicationUtil;
 import com.li.web.boot.util.UrlHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RequestMethod;
